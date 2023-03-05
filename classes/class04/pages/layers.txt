@@ -1,0 +1,11 @@
+index.js -> é responsável por chamar todas as camadas
+
+services ->
+-> toda logica de negocio
+->toda chamada externa
+viewa ->
+-> toda iteração com o DOM (com o HTML, com a pagina)
+controllers
+-> é a  intermediaria entre services e views 
+factories
+workers

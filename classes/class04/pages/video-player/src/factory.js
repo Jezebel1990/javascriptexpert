@@ -4,7 +4,6 @@ import Controller from "./controller.js"
 import Service from "./service.js"
 import View from "./view.js"
 
-
 async function getWorker() {
     if (supportsWorkerType()) {
     console.log('initializing esm workers')
@@ -41,16 +40,22 @@ setTimeout(() => worker.onmessage({ data: 'READY'}), 500);
     return workerMock
 }
 
+
+
+const view =  new View()
+const [rootPath] = window.location.href.split('/pages/')
+view.setVideoSrc(`${rootPath}/assets/video.mp4`)
+
 const worker = await getWorker()
 
 const camera = await Camera.init()
-const [rootPath] = window.location.href.split('/pages/')
+
 const factory = {
   async initialize() {
      return Controller.initialize({
       view: new View(),
-      service: new Service({}),
-      worker
+      worker,
+      camera,
      })
   }
 }

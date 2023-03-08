@@ -54,7 +54,7 @@ const knownGestures = [
 const gestureStrings = {
   'scroll-up': '🖐',
   'scroll-down': '✊️',
-  click: '🤏🏻'
+  'click': '🤏🏻'
 }
 
 export {

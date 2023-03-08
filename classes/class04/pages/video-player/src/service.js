@@ -3,8 +3,8 @@ const { shouldRun } = prepareRunChecker({timerDelay: 500 })
 
 const EAR_THRESHOLD = 0.27
 export default class Service {
-#model = null
-#faceLandmarksDetection
+  #model = null
+  #faceLandmarksDetection
 constructor({ faceLandmarksDetection }) {
     this.#faceLandmarksDetection = faceLandmarksDetection
 }
@@ -18,7 +18,7 @@ async loadModel() {
 // Calculate the position of eyelid to predict a blink
 #getEAR(upper, lower) {
     function getEucledianDistance(x1, y1, x2, y2) {
-      return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+      return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
     }
   
     return (
@@ -31,7 +31,7 @@ async loadModel() {
         ))
       / (2
         * getEucledianDistance(upper[0][0], upper[0][1], upper[8][0], upper[8][1]))
-    );
+    )
   }
   
 
@@ -42,23 +42,37 @@ async handBlinked(video) {
     for (const prediction of predictions) {
 
    // Right eye parameters
-   const lowerRight = prediction.annotations.rightEyeUpper0;
-   const upperRight = prediction.annotations.rightEyeLower0;
-   const rightEAR = this.#getEAR(upperRight, lowerRight);
+   const lowerRight = prediction.annotations.rightEyeUpper0
+   const upperRight = prediction.annotations.rightEyeLower0
+   const rightEAR = this.#getEAR(upperRight, lowerRight)
    // Left eye parameters
-   const lowerLeft = prediction.annotations.leftEyeUpper0;
-   const upperLeft = prediction.annotations.leftEyeLower0;
-   const leftEAR = this.#getEAR(upperLeft, lowerLeft);
+   const lowerLeft = prediction.annotations.leftEyeUpper0
+   const upperLeft = prediction.annotations.leftEyeLower0
+   const leftEAR = this.#getEAR(upperLeft, lowerLeft)
 
    // True if the eye is closed
+   
    const blinked = leftEAR <= EAR_THRESHOLD && rightEAR <= EAR_THRESHOLD
-   if (!blinked) continue
-   if(!shouldRun()) continue
-   return blinked
- }   
- return false
+   const blinkedLeft = leftEAR <= EAR_THRESHOLD && rightEAR >= EAR_THRESHOLD
+   const blinkedRight = leftEAR >= EAR_THRESHOLD && rightEAR <= EAR_THRESHOLD
+
+   if (blinkedLeft || blinkedRight) {
+    console.log(
+      blinkedLeft 
+        ? 'Left eye blinked' 
+        : 'Right eye blinked'
+    )
+
 }
-    
+
+
+if (!blinked) continue
+      if(!shouldRun()) continue
+
+      return blinked
+    }
+    return false
+  }
     
 #estimateFaces(video) {
     return this.#model.estimateFaces({

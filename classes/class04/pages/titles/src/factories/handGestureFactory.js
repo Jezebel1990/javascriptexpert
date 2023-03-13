@@ -11,11 +11,8 @@ import Camera from "../../../../lib/shared/camera.js"
 import { fingerLookupIndexes, gestureStrings, knownGestures } from "../util/util.js"
 
 const styler = new PseudoStyler()
-await styler.loadDocumentStyles();
-
 
 const camera = await Camera.init()
-
 
 const factory = {
   async initialize() {

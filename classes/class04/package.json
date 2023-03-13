@@ -11,10 +11,5 @@
   "description": "JSExpert Max Gesture Controller - Semana JS Expert 7.0",
   "devDependencies": {
     "browser-sync": "^2.27.11"
-  },
-  "dependencies": {
-    "@tensorflow-models/face-landmarks-detection": "^1.0.2",
-    "@tensorflow/tfjs-core": "^3.21.0",
-    "http-server": "^14.1.1"
   }
 }

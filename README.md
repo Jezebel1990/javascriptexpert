@@ -3,7 +3,7 @@
 Seja bem vindo(a), este código foi desenvolvido na sétima Semana Javascript Expert. 
 
 ## Preview
-<img width=100% src="./assets/demo-template-lg.gif">
+<img width=100% src="./initial-template/assets/demo-template-lg.gif">
 
 ## Pre-reqs
 
